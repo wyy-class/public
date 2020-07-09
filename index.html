@@ -64,6 +64,82 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-index" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/public/2020/07/09/index/" class="article-date">
+  <time datetime="2020-07-09T09:36:12.000Z" itemprop="datePublished">2020-07-09</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/public/2020/07/09/index/">算法</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/07/09/index/" data-id="ckcelqcut0000g8tffmzc5peb" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-快速排序" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/public/2020/07/09/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/" class="article-date">
+  <time datetime="2020-07-09T08:52:56.470Z" itemprop="datePublished">2020-07-09</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/public/2020/07/09/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/">快速排序</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <hr>
+<p>title:快速排序算法<br>categories:算法</p>
+<hr>
+<h3 id="核心思想"><a href="#核心思想" class="headerlink" title="核心思想"></a>核心思想</h3><h1 id="分治思想-划分思想"><a href="#分治思想-划分思想" class="headerlink" title="分治思想 划分思想"></a>分治思想 划分思想</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">public static void quickSort(int[] array) &#123;</span><br><span class="line">    // 调用快速排序的核心，传入left，right</span><br><span class="line">    quickSortCore(array, 0, array.length - 1);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  // 快速排序的核心，同样也是递归函数</span><br><span class="line">  public static void quickSortCore(int[] array, int left, int right) &#123;</span><br><span class="line">    // 递归基准条件，left &gt;= right 即表示数组只有1个或者0个元素。</span><br><span class="line">    <span class="keyword">if</span> (left &gt;= right) &#123;</span><br><span class="line">      <span class="built_in">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    // 根据轴分区</span><br><span class="line">    int pivotIndex = partition(array, left, right);</span><br><span class="line"></span><br><span class="line">    // 递归调用左侧和右侧数组分区</span><br><span class="line">    quickSortCore(array, left, pivotIndex - 1);</span><br><span class="line">    quickSortCore(array, pivotIndex + 1, right);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  // 对数组进行分区，并返回当前轴所在的位置</span><br><span class="line">  public static int partition(int[] array, int left, int right) &#123;</span><br><span class="line">    int temp=array[left];</span><br><span class="line">    int m=left;</span><br><span class="line">     left=left+1;</span><br><span class="line">     int t=0;</span><br><span class="line">    <span class="keyword">while</span>(left&lt;right)&#123;</span><br><span class="line">      <span class="keyword">while</span>(array[left]&lt;=temp&amp;&amp;left&lt;right)&#123;</span><br><span class="line">        left++;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">while</span>(array[right]&gt;=temp&amp;&amp;left&lt;right)&#123;</span><br><span class="line">        right--;</span><br><span class="line">      &#125;</span><br><span class="line">      t=array[left];</span><br><span class="line">      array[left]=array[right];</span><br><span class="line">      array[right]=t;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(array[left]&gt;temp)&#123;</span><br><span class="line">      left--;</span><br><span class="line">    &#125;</span><br><span class="line">    t=array[left];</span><br><span class="line">    array[left]=array[m];</span><br><span class="line">    array[m]=t;</span><br><span class="line">    <span class="built_in">return</span> left;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/07/09/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/" data-id="ckcelqcuy0001g8tf0u4v9y6g" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/public/2020/07/09/hello-world/" class="article-date">
@@ -131,6 +207,14 @@
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/public/2020/07/09/index/">算法</a>
+          </li>
+        
+          <li>
+            <a href="/public/2020/07/09/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/">快速排序</a>
+          </li>
         
           <li>
             <a href="/public/2020/07/09/hello-world/">Hello World</a>
