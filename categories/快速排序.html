@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="title:快速排序算法categories:算法  核心思想分治思想 划分思想1234567891011121314151617181920212223242526272829303132333435363738394041424344public static void quickSort(int[] array) &amp;#123;    &#x2F;&#x2F; 调用快速排序的核心，传入left，right">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://yoursite.com/categories/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="title:快速排序算法categories:算法  核心思想分治思想 划分思想1234567891011121314151617181920212223242526272829303132333435363738394041424344public static void quickSort(int[] array) &amp;#123;    &#x2F;&#x2F; 调用快速排序的核心，传入left，right">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-07-09T09:39:34.760Z">
+<meta property="article:modified_time" content="2020-07-09T09:39:34.760Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/public/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/public/css/style.css">
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/public/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/public/">Home</a>
+        
+          <a class="main-nav-link" href="/public/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/public/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="page-" class="article article-type-page" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/public/categories/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F.html" class="article-date">
+  <time datetime="2020-07-09T09:39:34.760Z" itemprop="datePublished">2020-07-09</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <hr>
+<p>title:快速排序算法<br>categories:算法</p>
+<hr>
+<h3 id="核心思想"><a href="#核心思想" class="headerlink" title="核心思想"></a>核心思想</h3><h1 id="分治思想-划分思想"><a href="#分治思想-划分思想" class="headerlink" title="分治思想 划分思想"></a>分治思想 划分思想</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">public static void quickSort(int[] array) &#123;</span><br><span class="line">    // 调用快速排序的核心，传入left，right</span><br><span class="line">    quickSortCore(array, 0, array.length - 1);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  // 快速排序的核心，同样也是递归函数</span><br><span class="line">  public static void quickSortCore(int[] array, int left, int right) &#123;</span><br><span class="line">    // 递归基准条件，left &gt;= right 即表示数组只有1个或者0个元素。</span><br><span class="line">    <span class="keyword">if</span> (left &gt;= right) &#123;</span><br><span class="line">      <span class="built_in">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    // 根据轴分区</span><br><span class="line">    int pivotIndex = partition(array, left, right);</span><br><span class="line"></span><br><span class="line">    // 递归调用左侧和右侧数组分区</span><br><span class="line">    quickSortCore(array, left, pivotIndex - 1);</span><br><span class="line">    quickSortCore(array, pivotIndex + 1, right);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  // 对数组进行分区，并返回当前轴所在的位置</span><br><span class="line">  public static int partition(int[] array, int left, int right) &#123;</span><br><span class="line">    int temp=array[left];</span><br><span class="line">    int m=left;</span><br><span class="line">     left=left+1;</span><br><span class="line">     int t=0;</span><br><span class="line">    <span class="keyword">while</span>(left&lt;right)&#123;</span><br><span class="line">      <span class="keyword">while</span>(array[left]&lt;=temp&amp;&amp;left&lt;right)&#123;</span><br><span class="line">        left++;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">while</span>(array[right]&gt;=temp&amp;&amp;left&lt;right)&#123;</span><br><span class="line">        right--;</span><br><span class="line">      &#125;</span><br><span class="line">      t=array[left];</span><br><span class="line">      array[left]=array[right];</span><br><span class="line">      array[right]=t;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(array[left]&gt;temp)&#123;</span><br><span class="line">      left--;</span><br><span class="line">    &#125;</span><br><span class="line">    t=array[left];</span><br><span class="line">    array[left]=array[m];</span><br><span class="line">    array[m]=t;</span><br><span class="line">    <span class="built_in">return</span> left;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/categories/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F.html" data-id="ckceloegj00017gtf6e1bg9ky" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/public/archives/2020/07/">July 2020</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/public/2020/07/09/hello-world/">Hello World</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/public/" class="mobile-nav-link">Home</a>
+  
+    <a href="/public/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/public/fancybox/jquery.fancybox.css">
+
+  
+<script src="/public/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/public/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
