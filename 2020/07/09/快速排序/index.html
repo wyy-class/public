@@ -5,17 +5,17 @@
   
 
   
-  <title>快速排序 | Hexo</title>
+  <title>快速排序算法 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="title:快速排序算法categories:算法  核心思想分治思想 划分思想1234567891011121314151617181920212223242526272829303132333435363738394041424344public static void quickSort(int[] array) &amp;#123;    &#x2F;&#x2F; 调用快速排序的核心，传入left，right">
+  <meta name="description" content="核心思想 分治思想 划分思想 1234567891011121314151617181920212223242526272829303132333435363738394041424344public static void quickSort(int[] array) &amp;#123;    &#x2F;&#x2F; 调用快速排序的核心，传入left，right    quickSortCore(array, 0, a">
 <meta property="og:type" content="article">
-<meta property="og:title" content="快速排序">
+<meta property="og:title" content="快速排序算法">
 <meta property="og:url" content="http://yoursite.com/2020/07/09/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="title:快速排序算法categories:算法  核心思想分治思想 划分思想1234567891011121314151617181920212223242526272829303132333435363738394041424344public static void quickSort(int[] array) &amp;#123;    &#x2F;&#x2F; 调用快速排序的核心，传入left，right">
+<meta property="og:description" content="核心思想 分治思想 划分思想 1234567891011121314151617181920212223242526272829303132333435363738394041424344public static void quickSort(int[] array) &amp;#123;    &#x2F;&#x2F; 调用快速排序的核心，传入left，right    quickSortCore(array, 0, a">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-07-09T08:52:56.470Z">
-<meta property="article:modified_time" content="2020-07-09T09:39:34.760Z">
+<meta property="article:modified_time" content="2020-07-09T09:43:12.815Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
   
@@ -72,6 +72,10 @@
   <time datetime="2020-07-09T08:52:56.470Z" itemprop="datePublished">2020-07-09</time>
 </a>
     
+  <div class="article-category">
+    <a class="article-category-link" href="/public/categories/%E7%AE%97%E6%B3%95/">算法</a>
+  </div>
+
   </div>
   <div class="article-inner">
     
@@ -80,7 +84,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      快速排序
+      快速排序算法
     </h1>
   
 
@@ -88,10 +92,8 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <hr>
-<p>title:快速排序算法<br>categories:算法</p>
-<hr>
-<h3 id="核心思想"><a href="#核心思想" class="headerlink" title="核心思想"></a>核心思想</h3><h1 id="分治思想-划分思想"><a href="#分治思想-划分思想" class="headerlink" title="分治思想 划分思想"></a>分治思想 划分思想</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">public static void quickSort(int[] array) &#123;</span><br><span class="line">    // 调用快速排序的核心，传入left，right</span><br><span class="line">    quickSortCore(array, 0, array.length - 1);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  // 快速排序的核心，同样也是递归函数</span><br><span class="line">  public static void quickSortCore(int[] array, int left, int right) &#123;</span><br><span class="line">    // 递归基准条件，left &gt;= right 即表示数组只有1个或者0个元素。</span><br><span class="line">    <span class="keyword">if</span> (left &gt;= right) &#123;</span><br><span class="line">      <span class="built_in">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    // 根据轴分区</span><br><span class="line">    int pivotIndex = partition(array, left, right);</span><br><span class="line"></span><br><span class="line">    // 递归调用左侧和右侧数组分区</span><br><span class="line">    quickSortCore(array, left, pivotIndex - 1);</span><br><span class="line">    quickSortCore(array, pivotIndex + 1, right);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  // 对数组进行分区，并返回当前轴所在的位置</span><br><span class="line">  public static int partition(int[] array, int left, int right) &#123;</span><br><span class="line">    int temp=array[left];</span><br><span class="line">    int m=left;</span><br><span class="line">     left=left+1;</span><br><span class="line">     int t=0;</span><br><span class="line">    <span class="keyword">while</span>(left&lt;right)&#123;</span><br><span class="line">      <span class="keyword">while</span>(array[left]&lt;=temp&amp;&amp;left&lt;right)&#123;</span><br><span class="line">        left++;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">while</span>(array[right]&gt;=temp&amp;&amp;left&lt;right)&#123;</span><br><span class="line">        right--;</span><br><span class="line">      &#125;</span><br><span class="line">      t=array[left];</span><br><span class="line">      array[left]=array[right];</span><br><span class="line">      array[right]=t;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(array[left]&gt;temp)&#123;</span><br><span class="line">      left--;</span><br><span class="line">    &#125;</span><br><span class="line">    t=array[left];</span><br><span class="line">    array[left]=array[m];</span><br><span class="line">    array[m]=t;</span><br><span class="line">    <span class="built_in">return</span> left;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+        <h3 id="核心思想"><a href="#核心思想" class="headerlink" title="核心思想"></a>核心思想</h3><p> 分治思想 划分思想</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">public static void quickSort(int[] array) &#123;</span><br><span class="line">    // 调用快速排序的核心，传入left，right</span><br><span class="line">    quickSortCore(array, 0, array.length - 1);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  // 快速排序的核心，同样也是递归函数</span><br><span class="line">  public static void quickSortCore(int[] array, int left, int right) &#123;</span><br><span class="line">    // 递归基准条件，left &gt;= right 即表示数组只有1个或者0个元素。</span><br><span class="line">    <span class="keyword">if</span> (left &gt;= right) &#123;</span><br><span class="line">      <span class="built_in">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    // 根据轴分区</span><br><span class="line">    int pivotIndex = partition(array, left, right);</span><br><span class="line"></span><br><span class="line">    // 递归调用左侧和右侧数组分区</span><br><span class="line">    quickSortCore(array, left, pivotIndex - 1);</span><br><span class="line">    quickSortCore(array, pivotIndex + 1, right);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  // 对数组进行分区，并返回当前轴所在的位置</span><br><span class="line">  public static int partition(int[] array, int left, int right) &#123;</span><br><span class="line">    int temp=array[left];</span><br><span class="line">    int m=left;</span><br><span class="line">     left=left+1;</span><br><span class="line">     int t=0;</span><br><span class="line">    <span class="keyword">while</span>(left&lt;right)&#123;</span><br><span class="line">      <span class="keyword">while</span>(array[left]&lt;=temp&amp;&amp;left&lt;right)&#123;</span><br><span class="line">        left++;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">while</span>(array[right]&gt;=temp&amp;&amp;left&lt;right)&#123;</span><br><span class="line">        right--;</span><br><span class="line">      &#125;</span><br><span class="line">      t=array[left];</span><br><span class="line">      array[left]=array[right];</span><br><span class="line">      array[right]=t;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(array[left]&gt;temp)&#123;</span><br><span class="line">      left--;</span><br><span class="line">    &#125;</span><br><span class="line">    t=array[left];</span><br><span class="line">    array[left]=array[m];</span><br><span class="line">    array[m]=t;</span><br><span class="line">    <span class="built_in">return</span> left;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -130,6 +132,13 @@
           <aside id="sidebar">
   
     
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/public/categories/%E7%AE%97%E6%B3%95/">算法</a></li></ul>
+    </div>
+  </div>
+
 
   
     
@@ -158,7 +167,7 @@
           </li>
         
           <li>
-            <a href="/public/2020/07/09/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/">快速排序</a>
+            <a href="/public/2020/07/09/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/">快速排序算法</a>
           </li>
         
           <li>
