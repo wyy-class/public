@@ -64,6 +64,134 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-验证码生成" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/public/2020/07/11/%E9%AA%8C%E8%AF%81%E7%A0%81%E7%94%9F%E6%88%90/" class="article-date">
+  <time datetime="2020-07-11T02:01:00.348Z" itemprop="datePublished">2020-07-11</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/public/categories/%E5%B7%A5%E5%85%B7%E7%B1%BB/">工具类</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/public/2020/07/11/%E9%AA%8C%E8%AF%81%E7%A0%81%E7%94%9F%E6%88%90/">验证码生成工具</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="使用说明"><a href="#使用说明" class="headerlink" title="使用说明"></a>使用说明</h1><p>  地址为”/checkCodeServlet”</p>
+<pre><code>package servlet;
+
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.util.Date;
+import java.util.Random;
+
+import javax.imageio.ImageIO;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+@WebServlet(&quot;/checkCodeServlet&quot;)
+public class CheckCodeServlet extends HttpServlet {
+
+    private static final long serialVersionUID = 1L;
+
+    private static final char[] CH = &quot;ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890&quot;.toCharArray();
+    private static final int IMAGE_WIDTH = 73;
+    private static final int IMAGE_HEIGHT = 28;
+    private static final int LINE_NUM = 30;
+    private static final int RANDOM_NUM = 4;
+    Random random = new Random();
+
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        response.setContentType(&quot;image/jpg&quot;);//设置相应类型,告诉浏览器输出的内容为图片
+        response.setHeader(&quot;Pragma&quot;, &quot;No-cache&quot;);//设置响应头信息，告诉浏览器不要缓存此内容
+        response.setHeader(&quot;Cache-Control&quot;, &quot;no-cache&quot;);
+        response.setDateHeader(&quot;Expire&quot;, new Date().getTime());
+
+        BufferedImage bi = new BufferedImage(IMAGE_WIDTH, IMAGE_HEIGHT, BufferedImage.TYPE_INT_BGR);
+        Graphics g = bi.getGraphics();
+        g.fillRect(0, 0, IMAGE_WIDTH, IMAGE_HEIGHT);
+        g.setColor(getRandomColor(110, 133));
+        g.setFont(new Font(&quot;Times New Roman&quot;, Font.ROMAN_BASELINE, 18));
+        // 绘制干扰线
+        for (int i = 1; i &lt;= LINE_NUM; i++) {
+            int x = random.nextInt(IMAGE_WIDTH);
+            int y = random.nextInt(IMAGE_HEIGHT);
+            int xl = random.nextInt(13);
+            int yl = random.nextInt(15);
+            g.drawLine(x, y, x + xl, y + yl);
+        }
+
+        // 绘制随机字符
+        StringBuilder sb = new StringBuilder();
+        String str = null;
+        for (int i = 0; i &lt; RANDOM_NUM; i++) {
+            g.setFont(new Font(&quot;Fixedsys&quot;, Font.CENTER_BASELINE, 18));
+            g.setColor(new Color(random.nextInt(101), random.nextInt(111), random.nextInt(121)));
+            str = CH[random.nextInt(CH.length)] + &quot;&quot;;
+            g.drawString(str, 13 * i, 16);
+            g.translate(random.nextInt(3), random.nextInt(3));
+            sb.append(str);
+        }
+        g.dispose();
+        request.getSession().setAttribute(&quot;checkCode&quot;, sb.toString());
+        ImageIO.write(bi, &quot;JPG&quot;, response.getOutputStream());
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+       this.doGet(req,resp);
+    }
+
+    /**
+     * 获得颜色
+     */
+    private Color getRandomColor(int fc, int bc) {
+        if (fc &gt; 255)
+            fc = 255;
+        if (bc &gt; 255)
+            bc = 255;
+        int r = fc + random.nextInt(bc - fc - 16);
+        int g = fc + random.nextInt(bc - fc - 14);
+        int b = fc + random.nextInt(bc - fc - 18);
+        return new Color(r, g, b);
+
+    }
+
+}                  
+</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/07/11/%E9%AA%8C%E8%AF%81%E7%A0%81%E7%94%9F%E6%88%90/" data-id="ckch1dh9b0000gktf7e5ngw4p" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-归并排序" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/public/2020/07/09/%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/" class="article-date">
@@ -171,8 +299,10 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>欢迎来到<a href="https://github.com/wyy-class" target="_blank" rel="noopener">wyy</a>的博客，希望我们能够一起学习，一起进步，加油！</p>
-<p>More info: <img src="http://image.baidu.com/search/detail?ct=503316480&z=undefined&tn=baiduimagedetail&ipn=d&word=%E6%AC%A2%E8%BF%8E%E5%85%89%E4%B8%B4&step_word=&ie=utf-8&in=&cl=2&lm=-1&st=undefined&hd=undefined&latest=undefined&copyright=undefined&cs=2145487995,3918592888&os=1648436880,3907292794&simid=3475138804,306584137&pn=0&rn=1&di=66880&ln=1722&fr=&fmq=1594284688051_R&fm=&ic=undefined&s=undefined&se=&sme=&tab=0&width=undefined&height=undefined&face=undefined&is=0,0&istype=0&ist=&jit=&bdtype=0&spn=0&pi=0&gsm=0&objurl=http%3A%2F%2Fimg11.360buyimg.com%2Fn1%2Fjfs%2Ft22426%2F97%2F302475165%2F80608%2Fcd922a1d%2F5b0901a8N7dde8812.jpg&rpstart=0&rpnum=0&adpicid=0&force=undefined" alt=""></p>
-<h3 id="欢迎光临寒舍"><a href="#欢迎光临寒舍" class="headerlink" title="欢迎光临寒舍"></a>欢迎光临寒舍</h3>
+<p> <img src="http://image.baidu.com/search/detail?ct=503316480&z=undefined&tn=baiduimagedetail&ipn=d&word=%E6%AC%A2%E8%BF%8E%E5%85%89%E4%B8%B4&step_word=&ie=utf-8&in=&cl=2&lm=-1&st=undefined&hd=undefined&latest=undefined&copyright=undefined&cs=2145487995,3918592888&os=1648436880,3907292794&simid=3475138804,306584137&pn=0&rn=1&di=66880&ln=1722&fr=&fmq=1594284688051_R&fm=&ic=undefined&s=undefined&se=&sme=&tab=0&width=undefined&height=undefined&face=undefined&is=0,0&istype=0&ist=&jit=&bdtype=0&spn=0&pi=0&gsm=0&objurl=http%3A%2F%2Fimg11.360buyimg.com%2Fn1%2Fjfs%2Ft22426%2F97%2F302475165%2F80608%2Fcd922a1d%2F5b0901a8N7dde8812.jpg&rpstart=0&rpnum=0&adpicid=0&force=undefined" alt="欢迎"></p>
+<h3 id="说明：博主能力现在有限，博客的其他功能正在一步步完善中"><a href="#说明：博主能力现在有限，博客的其他功能正在一步步完善中" class="headerlink" title="说明：博主能力现在有限，博客的其他功能正在一步步完善中"></a>说明：博主能力现在有限，博客的其他功能正在一步步完善中</h3><p>有什么问题或好的想法可以到GitHub留言:</p>
+<p><a href="https://github.com/wyy-class/public" target="_blank" rel="noopener">https://github.com/wyy-class/public</a></p>
+
       
     </div>
     <footer class="article-footer">
@@ -197,7 +327,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/public/categories/%E7%AE%97%E6%B3%95/">算法</a></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/public/categories/%E5%B7%A5%E5%85%B7%E7%B1%BB/">工具类</a></li><li class="category-list-item"><a class="category-list-link" href="/public/categories/%E7%AE%97%E6%B3%95/">算法</a></li></ul>
     </div>
   </div>
 
@@ -223,6 +353,10 @@
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/public/2020/07/11/%E9%AA%8C%E8%AF%81%E7%A0%81%E7%94%9F%E6%88%90/">验证码生成工具</a>
+          </li>
         
           <li>
             <a href="/public/2020/07/09/%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/">归并排序算法</a>
@@ -254,6 +388,7 @@
       &copy; 2020 John Doe<br>
       Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
+	<div>有什么问题或好的想法都可以到<a href="https://github.com/wyy-class/public" target="_blank">GitHub</a>上留言，博主会尽可能解决！</div>
   </div>
 </footer>
     </div>
