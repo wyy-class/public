@@ -4,6 +4,25 @@
   
     
     <entry>
+      <title>数据加密，解密</title>
+      <link href="/public/2020/07/13/%E5%8A%A0%E5%AF%86_%E8%A7%A3%E5%AF%86/"/>
+      <url>/public/2020/07/13/%E5%8A%A0%E5%AF%86_%E8%A7%A3%E5%AF%86/</url>
+      
+        <content type="html"><![CDATA[<p>以下只是自己的突发奇想，如果有什么好的想法，可以联系我。。。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">import java.math.BigInteger;</span><br><span class="line"></span><br><span class="line">public class Demo &#123;</span><br><span class="line">public static void main(String[] args) &#123;</span><br><span class="line">String str&#x3D;&quot;245abcdksl&quot;;</span><br><span class="line">BigInteger n&#x3D;encyp(str);</span><br><span class="line">String s&#x3D;decode(n);</span><br><span class="line">System.out.println(n+&quot; &quot;+s);</span><br><span class="line">&#125;</span><br><span class="line">public static BigInteger encyp(String s) &#123;</span><br><span class="line">BigInteger n&#x3D;BigInteger.ZERO;</span><br><span class="line">for(int i&#x3D;0;i&lt;s.length();i++) &#123;</span><br><span class="line">&#x2F;&#x2F;n&#x3D;n*256+s.charAt(i);</span><br><span class="line">n&#x3D;n.multiply(BigInteger.valueOf(256)).add(BigInteger.valueOf(s.charAt(i)));</span><br><span class="line">&#125;</span><br><span class="line">return n;</span><br><span class="line">&#125;</span><br><span class="line">public static String decode(BigInteger n) &#123;</span><br><span class="line">StringBuilder sb&#x3D;new StringBuilder();</span><br><span class="line">while(n.compareTo(BigInteger.ZERO)&#x3D;&#x3D;1) &#123;</span><br><span class="line">for(int i&#x3D;0;i&lt;256;i++) &#123;</span><br><span class="line">&#x2F;&#x2F;if((n-i)%256&#x3D;&#x3D;0) &#123;</span><br><span class="line">&#x2F;&#x2F;sb.append((char)i);</span><br><span class="line">&#x2F;&#x2F;n&#x3D;n-i;</span><br><span class="line">&#x2F;&#x2F;n&#x3D;n&#x2F;256;</span><br><span class="line">&#x2F;&#x2F;break;</span><br><span class="line">&#x2F;&#x2F;&#125;</span><br><span class="line">if((n.subtract(BigInteger.valueOf(i))).mod(BigInteger.valueOf(256)).equals(BigInteger.ZERO)) &#123;</span><br><span class="line">sb.append((char)i);</span><br><span class="line">n&#x3D;n.subtract(BigInteger.valueOf(i));</span><br><span class="line">n&#x3D;n.divide(BigInteger.valueOf(256));</span><br><span class="line">break;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line">return sb.reverse().toString();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 随笔 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>验证码生成工具</title>
       <link href="/public/2020/07/11/%E9%AA%8C%E8%AF%81%E7%A0%81%E7%94%9F%E6%88%90/"/>
       <url>/public/2020/07/11/%E9%AA%8C%E8%AF%81%E7%A0%81%E7%94%9F%E6%88%90/</url>
