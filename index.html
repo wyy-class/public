@@ -64,6 +64,112 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-最长公共序列" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/public/2020/09/02/%E6%9C%80%E9%95%BF%E5%85%AC%E5%85%B1%E5%BA%8F%E5%88%97/" class="article-date">
+  <time datetime="2020-09-02T06:32:39.602Z" itemprop="datePublished">2020-09-02</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/public/categories/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/">动态规划</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/public/2020/09/02/%E6%9C%80%E9%95%BF%E5%85%AC%E5%85%B1%E5%BA%8F%E5%88%97/">最长公共序列</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="核心思想"><a href="#核心思想" class="headerlink" title="核心思想"></a>核心思想</h3><p>   动态规划 </p>
+<pre><code>import java.util.Scanner;
+
+public class LCS {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        String s1=scanner.nextLine();
+        s1=&quot;0&quot;+s1;//为了避免dp数组越界
+        String s2=scanner.nextLine();
+        s2=&quot;0&quot;+s2;
+        int[][] dp=new int[s1.length()][s2.length()];
+        int[][] b=new int[s1.length()][s2.length()];//为了构造最优解
+        lcg(s1, s2, dp,b, s1.length()-1, s2.length()-1);
+        for(int i=0;i&lt;s1.length();i++){
+            for(int j=0;j&lt;s2.length();j++){
+                System.out.print(dp[i][j]);
+            }
+            System.out.println();
+        }
+        System.out.println();
+        for(int i=0;i&lt;s1.length();i++){
+            for(int j=0;j&lt;s2.length();j++){
+                System.out.print(b[i][j]);
+            }
+            System.out.println();
+        }
+       print(b, s1, s1.length()-1, s2.length()-1);
+
+    }
+    //最优子结构等式
+    public static void lcg(String s1,String s2,int[][] dp,int[][] b,int n,int m){
+        for(int i=1;i&lt;=n;i++){
+            for(int j=1;j&lt;=m;j++){
+                if(s1.charAt(i)==s2.charAt(j)){
+                    dp[i][j]=dp[i-1][j-1]+1;
+                    b[i][j]=1;
+                }
+                else{
+                    if(dp[i-1][j]&gt;dp[i][j-1]){
+                        dp[i][j]=dp[i-1][j];
+                        b[i][j]=2;
+                    }
+                    else{
+                        dp[i][j]=dp[i][j-1];
+                        b[i][j]=3;
+                    }
+                }
+            }
+        }
+    }
+//构造最优解
+    public static void print(int[][] b,String s1,int i,int j){
+        if(i==0||j==0) return;
+
+        if(b[i][j]==1){
+            System.out.println(s1.charAt(i));
+            print(b, s1, i-1, j-1);
+        }
+        else if(b[i][j]==2){
+            print(b, s1, i-1, j);
+        }
+        else{
+            print(b, s1, i, j-1);
+        }
+    }
+
+}</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/09/02/%E6%9C%80%E9%95%BF%E5%85%AC%E5%85%B1%E5%BA%8F%E5%88%97/" data-id="ckel0f0jj0000s8tf69fp55ql" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-0_1背包" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/public/2020/09/02/0_1%E8%83%8C%E5%8C%85/" class="article-date">
@@ -441,6 +547,10 @@ public class CheckCodeServlet extends HttpServlet {
       <ul>
         
           <li>
+            <a href="/public/2020/09/02/%E6%9C%80%E9%95%BF%E5%85%AC%E5%85%B1%E5%BA%8F%E5%88%97/">最长公共序列</a>
+          </li>
+        
+          <li>
             <a href="/public/2020/09/02/0_1%E8%83%8C%E5%8C%85/">验证码生成工具</a>
           </li>
         
@@ -454,10 +564,6 @@ public class CheckCodeServlet extends HttpServlet {
         
           <li>
             <a href="/public/2020/07/09/%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/">归并排序算法</a>
-          </li>
-        
-          <li>
-            <a href="/public/2020/07/09/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/">快速排序算法</a>
           </li>
         
       </ul>
