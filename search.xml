@@ -4,6 +4,25 @@
   
     
     <entry>
+      <title>验证码生成工具</title>
+      <link href="/public/2020/09/02/0_1%E8%83%8C%E5%8C%85/"/>
+      <url>/public/2020/09/02/0_1%E8%83%8C%E5%8C%85/</url>
+      
+        <content type="html"><![CDATA[<h1 id="二位数组解析0—1背包问题"><a href="#二位数组解析0—1背包问题" class="headerlink" title="二位数组解析0—1背包问题"></a>二位数组解析0—1背包问题</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">import java.util.Scanner;</span><br><span class="line"></span><br><span class="line">public class BeiBao &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        Scanner sc&#x3D;new Scanner(System.in);</span><br><span class="line">        int n&#x3D;sc.nextInt();&#x2F;&#x2F;物品个数</span><br><span class="line">        int m&#x3D;sc.nextInt();&#x2F;&#x2F;背包容量</span><br><span class="line">        int[][] dp&#x3D;new int[n+1][m+1];</span><br><span class="line">        int[] v&#x3D;new int[n+1];&#x2F;&#x2F;各物品地价值</span><br><span class="line">        int[] w&#x3D;new int[n+1];&#x2F;&#x2F;各物品地重量</span><br><span class="line">        for(int i&#x3D;1;i&lt;&#x3D;n;i++)&#123;</span><br><span class="line">            w[i]&#x3D;sc.nextInt();</span><br><span class="line">            v[i]&#x3D;sc.nextInt();</span><br><span class="line">        &#125;</span><br><span class="line">        p(dp, v, w, n, m);</span><br><span class="line"></span><br><span class="line">        for(int i&#x3D;0;i&lt;&#x3D;n;i++)&#123;</span><br><span class="line">            for(int j&#x3D;0;j&lt;&#x3D;m;j++)&#123;</span><br><span class="line">                System.out.print(dp[i][j]+&quot; &quot;);</span><br><span class="line">            &#125;</span><br><span class="line">            System.out.println();</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println();</span><br><span class="line"></span><br><span class="line">        print(dp, w, v, n, m);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#x2F;&#x2F; 最优子结构等式</span><br><span class="line">    public static void p(int[][] dp,int[] v,int[] w,int n,int m)&#123;</span><br><span class="line">        for(int i&#x3D;1;i&lt;&#x3D;n;i++)&#123;</span><br><span class="line">            for(int j&#x3D;1;j&lt;&#x3D;m;j++)&#123;</span><br><span class="line">                if(w[i]&lt;&#x3D;j)&#123;</span><br><span class="line">                    dp[i][j]&#x3D;Math.max(dp[i-1][j-w[i]]+v[i], dp[i-1][j]);</span><br><span class="line">                &#125;</span><br><span class="line">                else&#123;</span><br><span class="line">                    dp[i][j]&#x3D;dp[i-1][j];</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    &#x2F;&#x2F;构造最优解 </span><br><span class="line">    public static void print(int[][] dp,int[] w,int[] v,int i,int j)&#123;</span><br><span class="line">        if(i&#x3D;&#x3D;0||j&#x3D;&#x3D;0) return;</span><br><span class="line">        if(dp[i][j]&#x3D;&#x3D;dp[i-1][j])&#123;</span><br><span class="line">            print(dp, w,v, i-1, j);</span><br><span class="line">        &#125;</span><br><span class="line">        else&#123;</span><br><span class="line">            System.out.println(w[i]+&quot; &quot;+v[i]);</span><br><span class="line">            print(dp, w, v, i-1, j-w[i]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#96;&#96;&#96; </span><br><span class="line"># 测试样例</span><br></pre></td></tr></table></figure><p>4 8</p><p>2 3<br>4 5<br>4 6<br>1 5<br>0 0 0 0 0 0 0 0 0<br>0 0 3 3 3 3 3 3 3<br>0 0 3 3 5 5 8 8 8<br>0 0 3 3 6 6 9 9 11<br>0 5 5 8 8 11 11 14 14</p><p>1 5<br>4 6<br>2 3</p><pre><code></code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> 动态规划 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>数据加密，解密</title>
       <link href="/public/2020/07/13/%E5%8A%A0%E5%AF%86_%E8%A7%A3%E5%AF%86/"/>
       <url>/public/2020/07/13/%E5%8A%A0%E5%AF%86_%E8%A7%A3%E5%AF%86/</url>
@@ -51,7 +70,7 @@
       
       <categories>
           
-          <category> 算法 </category>
+          <category> 排序算法 </category>
           
       </categories>
       
@@ -70,7 +89,7 @@
       
       <categories>
           
-          <category> 算法 </category>
+          <category> 排序算法 </category>
           
       </categories>
       
